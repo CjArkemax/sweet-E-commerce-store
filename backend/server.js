@@ -19,7 +19,36 @@ app.use(cors());
 app.use(helmet());// security middleware  that helps us protect our app by setting various http headers
 app.use(morgan("dev"));// to log the request
 
+//apply arcjet rate-limit to all routes
+app.use(async(req,res,next)=>{
+    try {
+        const decision= await aj.protect(req,{
+            requested:1 //specifies that each request consumes 1 token
+        });
+        
+        if (decision.isDenied()) {
+            if(decision.reason.isRateLimit()){
+                res.status(429).json({error:"Too Many Requests"});
+            }else if (decision.reason.isBot()) {
+                res.status(403).json({error:"Bot Access Denied"});
+            } else{
+                res.status(403).json({error:"Forbidden"});
+            }
+            return
+        }
+        
+        
+        if(decision.results.some((result)=>result.reason.isBot() && result.reason.isSpoofed())){
+            res.status(403).json({error:"Spoofed Bot Detected, Access Denied"});
+        }
 
+
+        next();
+    } catch (error) {
+        console.log("Arcjet error",error);
+        next(error);
+    }
+})
 app.use("/api/products",productRoutes)
 
 async function initdb(){
