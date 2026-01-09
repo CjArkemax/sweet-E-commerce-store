@@ -1,0 +1,46 @@
+# ===== Node / Express =====
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.env
+.env.local
+.env.*.local
+
+# ===== Logs =====
+logs
+*.log
+
+# ===== Build output =====
+dist/
+build/
+
+# ===== React (CRA / Vite) =====
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+
+# ===== Backend build (if using TS or bundler) =====
+backend/dist/
+backend/build/
+
+# ===== Cache =====
+.cache/
+.parcel-cache/
+.vite/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== IDEs =====
+.vscode/
+.idea/
+*.swp
+
+# ===== Testing =====
+coverage/
+
+# ===== Optional =====
+*.tsbuildinfo
