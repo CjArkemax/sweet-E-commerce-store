@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link,useResolvedPath } from 'react-router-dom'
 import {ShoppingBagIcon,ShoppingCartIcon} from "lucide-react"
 import ThemeSelector from "./ThemeSelector";
@@ -10,7 +9,7 @@ const Navbar = () => {
 
     // const { products } = useProductStore();
   return (
-    <div className="bg-base-100/80 backdrop-blur-lg border-b border-base-conten/10 sticky top-0 z-50">
+    <div className="bg-base-100/80 backdrop-blur-lg border-b border-base-content/10 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto">
             <div className="navbar px-4 min-h-[4rem] justify-between">
                 {/* LOGO */}

@@ -35,12 +35,13 @@ app.use(async(req,res,next)=>{
             } else{
                 res.status(403).json({error:"Forbidden"});
             }
-            return
+            return;
         }
         
         
         if(decision.results.some((result)=>result.reason.isBot() && result.reason.isSpoofed())){
             res.status(403).json({error:"Spoofed Bot Detected, Access Denied"});
+            return;
         }
 
 
@@ -49,7 +50,7 @@ app.use(async(req,res,next)=>{
         console.log("Arcjet error",error);
         next(error);
     }
-})
+});
 app.use("/api/products",productRoutes)
 
 async function initdb(){
