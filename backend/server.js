@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 
 import productRoutes from "./routes/productRoutes.js"// important to add .js or else it will crash  
 import {sql} from "./config/db.js"
+import { aj } from "./lib/arcjet.js";
 
 dotenv.config()// after importing use this
 
@@ -16,7 +17,7 @@ console.log(PORT);
 
 app.use(express.json());
 app.use(cors());
-app.use(helmet());// security middleware  that helps us protect our app by setting various http headers
+app.use(helmet( {contentSecurityPolicy: false}));// security middleware  that helps us protect our app by setting various http headers
 app.use(morgan("dev"));// to log the request
 
 //apply arcjet rate-limit to all routes
